@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Edit List Antri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b0b0e;color:#fff;font-family:Nunito,Arial,sans-serif;padding:24px}.box{max-width:700px;margin:auto;background:#141419;border:1px solid #292930;border-radius:16px;padding:22px}.title{text-align:center;font:900 25px Poppins;margin-bottom:4px}.sub{text-align:center;color:#ff4b32;font-weight:800;margin-bottom:22px}.item{display:grid;grid-template-columns:42px 1fr 110px 80px 42px;gap:8px;align-items:center;margin-bottom:9px}.num{height:42px;border-radius:9px;background:#303038;display:flex;align-items:center;justify-content:center;font-weight:900}.item input{height:42px;border:1px solid #303039;border-radius:9px;background:#09090c;color:#fff;padding:0 12px;font:800 14px Nunito}.btn{border:0;border-radius:9px;height:42px;font:900 13px Nunito;cursor:pointer}.live{background:#e93220;color:#fff}.del{background:#2a2a31;color:#fff}.actions{display:flex;gap:9px;margin-top:16px}.add,.save{flex:1;border:0;border-radius:10px;height:46px;font:900 14px Nunito;cursor:pointer}.add{background:#292930;color:#fff}.save{background:#ed3823;color:#fff}.hint{text-align:center;color:#85858e;font-size:12px;margin-top:14px}
+</style></head><body><div class="box"><div class="title">LIST ANTRI</div><div class="sub">ANTRIAN BY 1 — EDITOR</div><div id="list"></div><div class="actions"><button class="add" onclick="add()">+ TAMBAH ANTRIAN</button><button class="save" onclick="save()">SIMPAN</button></div><div class="hint">Data tersimpan di browser ini dan dibaca oleh overlay.</div></div>
+<script>
+const fallback=[{name:"semz @abcdnmz",score:"444",live:true},{name:"rplu @hnlfl4k",score:"444"},{name:"n1cl.2147",score:"444"},{name:"vln_8180",score:"444"},{name:"www.tiktok.com",score:"444"}];
+let data=[];try{data=JSON.parse(localStorage.getItem("listAntriData"))||fallback}catch(e){data=fallback}
+function draw(){document.getElementById("list").innerHTML=data.map((x,i)=>`<div class="item"><div class="num">${i+1}</div><input value="${safe(x.name)}" placeholder="Nama / username"><input value="${safe(x.score||"444")}" placeholder="Score"><button class="btn live" onclick="data[${i}].live=!data[${i}].live;draw()">${x.live?"LIVE":"OFF"}</button><button class="btn del" onclick="data.splice(${i},1);draw()">×</button></div>`).join("")}
+function safe(v){return String(v??"").replace(/"/g,"&quot;")}
+function read(){document.querySelectorAll(".item").forEach((el,i)=>{let ins=el.querySelectorAll("input");data[i].name=ins[0].value;data[i].score=ins[1].value})}
+function save(){read();localStorage.setItem("listAntriData",JSON.stringify(data));alert("Tersimpan!")}
+function add(){read();data.push({name:"username baru",score:"444",live:false});draw()}
+draw();
+</script></body></html>

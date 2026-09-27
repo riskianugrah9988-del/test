@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LIST ANTRI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:transparent}
+body{font-family:Nunito,Arial,sans-serif;color:#fff}
+.overlay{width:520px;padding:18px 16px 16px;background:linear-gradient(180deg,rgba(9,9,12,.98),rgba(4,4,7,.96));border:1px solid rgba(255,255,255,.08);border-radius:12px;box-shadow:0 18px 45px rgba(0,0,0,.38)}
+.header{text-align:center;padding:2px 0 14px}.title{margin:0;font:900 27px/1 Poppins,Arial,sans-serif;letter-spacing:1.4px;text-align:center}.subtitle{margin-top:7px;font:800 10px/1 Poppins,Arial,sans-serif;letter-spacing:2.4px;color:#a95850;text-align:center}.subtitle:before{content:"✦ ";color:#8c5a55}.subtitle:after{content:" ✦";color:#8c5a55}
+.rows{display:flex;flex-direction:column;gap:8px}.row{min-height:72px;display:grid;grid-template-columns:52px minmax(0,1fr) auto;align-items:center;gap:13px;padding:8px 12px 8px 9px;border-radius:7px;background:linear-gradient(105deg,rgba(19,19,24,.98),rgba(8,8,12,.98));border:1px solid rgba(255,255,255,.055)}
+.row:first-child{background:linear-gradient(105deg,rgba(37,12,13,.98),rgba(13,8,10,.98));border-color:rgba(255,64,38,.36)}
+.badge{width:50px;height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#aeb2bb,#70747d);font:900 20px Poppins,Arial,sans-serif;box-shadow:inset 0 1px rgba(255,255,255,.28),0 3px 9px rgba(0,0,0,.25)}
+.row:first-child .badge{background:linear-gradient(145deg,#ff4b2e,#df2616);box-shadow:inset 0 1px rgba(255,255,255,.24),0 4px 14px rgba(255,54,28,.25)}
+.info{min-width:0}.name{font:900 18px/22px Nunito,Arial,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.score{margin-top:2px;font:800 15px/18px Nunito,Arial,sans-serif;color:#f2f2f3}
+.live{min-width:65px;padding:8px 11px 7px;border-radius:7px;background:linear-gradient(180deg,#ff4b2d,#e32a18);font:900 11px/12px Poppins,Arial,sans-serif;letter-spacing:.5px;text-align:center}
+</style></head>
+<body><div class="overlay"><div class="header"><div class="title">LIST ANTRI</div><div class="subtitle">ANTRIAN BY 1</div></div><div class="rows" id="rows"></div></div>
+<script>
+const fallback=[
+{name:"semz @abcdnmz",score:"444",live:true},
+{name:"rplu @hnlfl4k",score:"444"},
+{name:"n1cl.2147",score:"444"},
+{name:"vln_8180",score:"444"},
+{name:"www.tiktok.com",score:"444"}
+];
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function render(a){document.getElementById("rows").innerHTML=(a||[]).map((x,i)=>`<div class="row"><div class="badge">${i+1}</div><div class="info"><div class="name">${esc(x.name)}</div><div class="score">${esc(x.score||"444")}</div></div><div>${x.live?'<div class="live">LIVE</div>':''}</div></div>`).join("")}
+function load(){try{const a=JSON.parse(localStorage.getItem("listAntriData"));if(Array.isArray(a)){render(a);return}}catch(e){}render(fallback)}
+load();setInterval(load,1000);
+</script></body></html>
